@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Reporte de Ganancias</title>
+  <style>
+    :root{
+      --glass: rgba(255,255,255,0.08);
+      --card: rgba(255,255,255,0.06);
+      --accent: rgba(255,255,255,0.12);
+      --glass-2: rgba(255,255,255,0.04);
+    }
+    html,body{
+      height:100%;
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      color:#fff;
+    }
+    body{
+      background: radial-gradient(1200px 600px at 10% 10%, #1f6feb22 0%, transparent 10%),
+                  radial-gradient(900px 500px at 90% 90%, #ff6b6b22 0%, transparent 10%),
+                  linear-gradient(135deg,#0f172a 0%, #071032 50%, #0b1b2f 100%);
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+      padding:32px;
+      box-sizing:border-box;
+    }
+    .container{
+      width:100%;
+      max-width:980px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:14px;
+      padding:0;
+      box-shadow:0 10px 30px rgba(2,6,23,0.6);
+      backdrop-filter: blur(6px);
+      overflow:hidden;
+    }
+
+    /* Header con imagen */
+    .header{
+      position:relative;
+      width:100%;
+      height:200px;
+      overflow:hidden;
+    }
+    .header img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    .header h1{
+      position:absolute;
+      bottom:30px; 
+      left:20px;
+      margin:0;
+      color:#fff;
+      font-size:28px;
+      text-shadow:0 3px 6px rgba(0,0,0,0.6);
+    }
+
+    /* Título debajo del header */
+    .page-title {
+      text-align: center; 
+      color: #fff;
+      font-size: 28px;
+      margin: 20px 0; 
+      text-shadow: 0 3px 6px rgba(0,0,0,0.6);
+    }
+
+    /* Contenido en columna centrada */
+    .content {
+      padding:22px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    /* Tarjeta de la tabla */
+    .card{
+      background:var(--card);
+      border-radius:12px;
+      padding:14px;
+      width:100%;
+      max-width:900px;
+    }
+
+    /* Wrapper para scroll en móviles */
+    .table-wrapper {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      font-size:14px;
+      border:1px solid rgba(255,255,255,0.2);
+      overflow:hidden;
+      border-radius:10px;
+      animation:fadeIn 1s ease-in-out;
+      min-width: 600px; /* asegura scroll en móvil */
+    }
+    thead th{
+      font-size:12px;
+      text-align:left;
+      padding:8px 10px;
+      color:#dbeafe;
+      opacity:0.95;
+      background:rgba(255,255,255,0.05);
+    }
+    tbody td{
+      padding:10px;
+      border-top:1px solid rgba(255,255,255,0.1);
+      transition:background 0.3s ease;
+    }
+    tbody tr:hover td{background:rgba(255,255,255,0.08);}
+    .cell-num{text-align:right;font-variant-numeric:tabular-nums}
+    .muted{opacity:0.7;font-size:13px}
+
+    /* Animaciones */
+    @keyframes fadeIn {
+      from {opacity:0; transform:translateY(15px);}
+      to {opacity:1; transform:translateY(0);}
+    }
+
+    /* Panel Totales */
+    .totals{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      width:100%;
+      max-width:400px;
+      margin:0 auto;
+    }
+    .total-card{
+      background:linear-gradient(180deg,var(--glass),var(--glass-2));
+      padding:12px;
+      border-radius:10px;
+      animation:fadeIn 1.2s ease-in-out;
+    }
+    .person{display:flex;justify-content:space-between;align-items:center}
+    .name{font-weight:600}
+    .value{font-weight:700}
+
+    /* Responsive para pantallas pequeñas */
+    @media (max-width: 760px) {
+      body { padding: 16px; }
+      .header { height: 150px; }
+      .header h1 { font-size: 22px; bottom: 20px; }
+      .page-title { font-size: 24px; margin: 16px 0; }
+      .card { padding: 10px; max-width: 100%; }
+      table { font-size: 12px; min-width: 600px; } 
+      .totals { max-width: 100%; }
+      .total-card { padding: 10px; }
+      .person .name, .person .value { font-size: 14px; }
+    }
+
+    /* Muy pequeñas (<360px) */
+    @media (max-width: 360px) {
+      table { min-width: 500px; font-size: 11px; }
+      .page-title { font-size: 20px; margin: 12px 0; }
+      .header h1 { font-size: 20px; bottom: 15px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <img src="https://www.statuscake.com/kb/wp-content/uploads/2018/08/Telegram-logo.jpg" alt="Encabezado" />
+    </div>
+
+    <!-- Título debajo del header -->
+    <h1 class="page-title">Registro de pagos</h1>
+
+    <div class="content">
+      <!-- Tabla centrada con scroll en móvil -->
+      <div class="card table-wrapper">
+        <table id="payments-table" aria-label="Tabla de pagos">
+          <thead>
+            <tr>
+              <th>NOMBRE</th>
+              <th>GANANCIA</th>
+              <th>NOMBRE</th>
+              <th>GANANCIA</th>
+              <th>FECHA</th>
+              <th>HORA</th>
+              <th>METODO DE PAGO</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>MARIA JOSE</td>
+              <td class="cell-num">2.50</td>
+              <td>MIKE ROSALES</td>
+              <td class="cell-num">2.50</td>
+              <td>09/07/2025</td>
+              <td>9:00 AM</td>
+              <td>PAYPAL</td>
+            </tr>
+
+
+
+
+ <tr>
+              <td>MARIA JOSE</td>
+              <td class="cell-num">7.50</td>
+              <td>MIKE ROSALES</td>
+              <td class="cell-num">7.50</td>
+              <td>09/07/2025</td>
+              <td>1:38 PM</td>
+              <td>PAYPAL</td>
+            </tr>
+
+
+             <tr>
+              <td>MARIA JOSE</td>
+              <td class="cell-num">10.00</td>
+              <td>MIKE ROSALES</td>
+              <td class="cell-num">10.00</td>
+              <td>09/07/2025</td>
+              <td>5:14 PM</td>
+              <td>PAYPAL</td>
+            </tr>
+
+            
+             <tr>
+              <td>MARIA JOSE</td>
+              <td class="cell-num">10.00</td>
+              <td>MIKE ROSALES</td>
+              <td class="cell-num">10.00</td>
+              <td>09/09/2025</td>
+              <td>1:00 AM</td>
+              <td>PAYPAL</td>
+            </tr>
+
+
+              <tr>
+              <td>MARIA JOSE</td>
+              <td class="cell-num">5.00</td>
+              <td>MIKE ROSALES</td>
+              <td class="cell-num">5.00</td>
+              <td>09/09/2025</td>
+              <td>2:00 AM</td>
+              <td>PAYPAL</td>
+            </tr>
+
+
+            
+            <tr>
+              <td>MARIA JOSE</td>
+              <td class="cell-num">12.50</td>
+              <td>MIKE ROSALES</td>
+              <td class="cell-num">12.50</td>
+              <td>09/09/2025</td>
+              <td>3:21 AM</td>
+              <td>PAYPAL</td>
+            </tr>
+
+
+             <tr>
+              <td>MARIA JOSE</td>
+              <td class="cell-num">2.50</td>
+              <td>MIKE ROSALES</td>
+              <td class="cell-num">2.50</td>
+              <td>09/10/2025</td>
+              <td>9:31 AM</td>
+              <td>PAYPAL</td>
+            </tr>
+
+  <tr>
+              <td>MARIA JOSE</td>
+              <td class="cell-num">7.50</td>
+              <td>MIKE ROSALES</td>
+              <td class="cell-num">7.50</td>
+              <td>09/10/2025</td>
+              <td>4:05 AM</td>
+              <td>PAYPAL</td>
+            </tr>
+
+            
+ <tr>
+              <td>MARIA JOSE</td>
+              <td class="cell-num">7.50</td>
+              <td>MIKE ROSALES</td>
+              <td class="cell-num">7.50</td>
+              <td>09/10/2025</td>
+              <td>5:05 PM</td>
+              <td>PAYPAL</td>
+            </tr>
+
+
+             <tr>
+              <td>MARIA JOSE</td>
+              <td class="cell-num">2.50</td>
+              <td>MIKE ROSALES</td>
+              <td class="cell-num">2.50</td>
+              <td>09/10/2025</td>
+              <td>7:35 PM</td>
+              <td>PAYPAL</td>
+            </tr>
+
+
+             <tr>
+              <td>MARIA JOSE</td>
+              <td class="cell-num">5.00</td>
+              <td>MIKE ROSALES</td>
+              <td class="cell-num">5.00</td>
+              <td>09/11/2025</td>
+              <td>12:36 PM</td>
+              <td>PAYPAL</td>
+            </tr>
+
+
+
+
+
+
+               <tr>
+              <td>MARIA JOSE</td>
+              <td class="cell-num">5.00</td>
+              <td>MIKE ROSALES</td>
+              <td class="cell-num">5.00</td>
+              <td>09/11/2025</td>
+              <td>3:43 AM</td>
+              <td>PAYPAL</td>
+            </tr>
+
+             <tr>
+              <td>MARIA JOSE</td>
+              <td class="cell-num">12.50</td>
+              <td>MIKE ROSALES</td>
+              <td class="cell-num">12.50</td>
+              <td>09/12/2025</td>
+              <td>9:56 PM</td>
+              <td>PAYPAL</td>
+            </tr>
+
+
+            
+             <tr>
+              <td>MARIA JOSE</td>
+              <td class="cell-num">7.50</td>
+              <td>MIKE ROSALES</td>
+              <td class="cell-num">7.50</td>
+              <td>09/12/2025</td>
+              <td>9:56 PM</td>
+              <td>PAYPAL</td>
+            </tr>
+
+
+             <tr>
+              <td>MARIA JOSE</td>
+              <td class="cell-num">2.50</td>
+              <td>MIKE ROSALES</td>
+              <td class="cell-num">2.50</td>
+              <td>09/14/2025</td>
+              <td>2:06 PM</td>
+              <td>PAYPAL</td>
+            </tr>
+
+
+
+             <tr>
+              <td>MARIA JOSE</td>
+              <td class="cell-num">2.50</td>
+              <td>MIKE ROSALES</td>
+              <td class="cell-num">2.50</td>
+              <td>09/15/2025</td>
+              <td>12:38 PM</td>
+              <td>PAYPAL</td>
+            </tr>
+
+         
+
+
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Totales centrados -->
+      <div class="totals">
+        <div class="total-card">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+            <div class="muted">Totales por persona</div>
+            <div class="muted">Moneda: USD</div>
+          </div>
+          <div class="person"><div class="name">MIKE ROSALES</div><div class="value" id="total-mike">$0.00</div></div>
+          <div class="person"><div class="name">MARIA JOSE</div><div class="value" id="total-maria">$0.00</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      const rows = Array.from(document.querySelectorAll('#payments-table tbody tr'));
+      const totals = {}
+      rows.forEach(tr=>{
+        const cells = tr.querySelectorAll('td');
+        const pairs = [0,2].map(i=>({name: cells[i].textContent.trim(), gain: parseFloat(cells[i+1].textContent.trim())||0}));
+        pairs.forEach(p=>{
+          if(!p.name) return;
+          totals[p.name] = (totals[p.name]||0) + p.gain;
+        });
+      });
+
+      const mikeEl = document.getElementById('total-mike');
+      const mariaEl = document.getElementById('total-maria');
+      const fmt = v => '$' + v.toFixed(2);
+
+      if(mikeEl) mikeEl.textContent = fmt(totals['MIKE ROSALES'] || totals['MIKE'] || 0);
+      if(mariaEl) mariaEl.textContent = fmt(totals['MARIA JOSE'] || 0);
+    })();
+  </script>
+</body>
+</html>
