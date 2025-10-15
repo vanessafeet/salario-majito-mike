@@ -37,8 +37,6 @@
       backdrop-filter: blur(6px);
       overflow:hidden;
     }
-
-    /* Header con imagen */
     .header{
       position:relative;
       width:100%;
@@ -60,8 +58,6 @@
       font-size:28px;
       text-shadow:0 3px 6px rgba(0,0,0,0.6);
     }
-
-    /* Título debajo del header */
     .page-title {
       text-align: center; 
       color: #fff;
@@ -69,8 +65,6 @@
       margin: 20px 0; 
       text-shadow: 0 3px 6px rgba(0,0,0,0.6);
     }
-
-    /* Contenido en columna centrada */
     .content {
       padding:22px;
       display: flex;
@@ -78,8 +72,6 @@
       align-items: center;
       gap: 20px;
     }
-
-    /* Tarjeta de la tabla */
     .card{
       background:var(--card);
       border-radius:12px;
@@ -87,13 +79,10 @@
       width:100%;
       max-width:900px;
     }
-
-    /* Wrapper para scroll en móviles */
     .table-wrapper {
       width: 100%;
       overflow-x: auto;
     }
-
     table{
       width:100%;
       border-collapse:collapse;
@@ -102,7 +91,7 @@
       overflow:hidden;
       border-radius:10px;
       animation:fadeIn 1s ease-in-out;
-      min-width: 600px; /* asegura scroll en móvil */
+      min-width: 600px;
     }
     thead th{
       font-size:12px;
@@ -120,14 +109,10 @@
     tbody tr:hover td{background:rgba(255,255,255,0.08);}
     .cell-num{text-align:right;font-variant-numeric:tabular-nums}
     .muted{opacity:0.7;font-size:13px}
-
-    /* Animaciones */
     @keyframes fadeIn {
       from {opacity:0; transform:translateY(15px);}
       to {opacity:1; transform:translateY(0);}
     }
-
-    /* Panel Totales */
     .totals{
       display:flex;
       flex-direction:column;
@@ -145,8 +130,6 @@
     .person{display:flex;justify-content:space-between;align-items:center}
     .name{font-weight:600}
     .value{font-weight:700}
-
-    /* Responsive para pantallas pequeñas */
     @media (max-width: 760px) {
       body { padding: 16px; }
       .header { height: 150px; }
@@ -158,8 +141,6 @@
       .total-card { padding: 10px; }
       .person .name, .person .value { font-size: 14px; }
     }
-
-    /* Muy pequeñas (<360px) */
     @media (max-width: 360px) {
       table { min-width: 500px; font-size: 11px; }
       .page-title { font-size: 20px; margin: 12px 0; }
@@ -173,11 +154,14 @@
       <img src="https://www.statuscake.com/kb/wp-content/uploads/2018/08/Telegram-logo.jpg" alt="Encabezado" />
     </div>
 
-    <!-- Título debajo del header -->
     <h1 class="page-title">Registro de pagos</h1>
-
     <div class="content">
-      <!-- Tabla centrada con scroll en móvil -->
+
+
+
+
+
+      <!-- Primera tabla -->
       <div class="card table-wrapper">
         <table id="payments-table" aria-label="Tabla de pagos">
           <thead>
@@ -192,7 +176,15 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <!-- Aquí van todas tus filas de la primera tabla -->
+
+
+
+
+
+
+
+ <tr>
               <td>MARIA JOSE</td>
               <td class="cell-num">2.50</td>
               <td>MIKE ROSALES</td>
@@ -203,7 +195,7 @@
             </tr>
 
 
-
+            
 
  <tr>
               <td>MARIA JOSE</td>
@@ -549,6 +541,86 @@
               <td>10:17 PM</td>
               <td>PAYPAL</td>
             </tr>
+            
+            
+             <tr>
+              <td>MARIA JOSE</td>
+              <td class="cell-num">10.00</td>
+              <td>MIKE ROSALES</td>
+              <td class="cell-num">10.00</td>
+              <td>09/24/2025</td>
+              <td>9:10 PM</td>
+              <td>PAYPAL</td>
+            </tr>
+
+
+              <tr>
+              <td>MARIA JOSE</td>
+              <td class="cell-num">10.00</td>
+              <td>MIKE ROSALES</td>
+              <td class="cell-num">10.00</td>
+              <td>09/25/2025</td>
+              <td>09:05 PM</td>
+              <td>PAYPAL</td>
+            </tr>
+
+            <tr>
+              <td>MARIA JOSE</td>
+              <td class="cell-num">10.00</td>
+              <td>MIKE ROSALES</td>
+              <td class="cell-num">10.00</td>
+              <td>09/26/2025</td>
+              <td>12:43 PM</td>
+              <td>PAYPAL</td>
+            </tr>
+
+
+             <tr>
+              <td>MARIA JOSE</td>
+              <td class="cell-num">10.00</td>
+              <td>MIKE ROSALES</td>
+              <td class="cell-num">10.00</td>
+              <td>09/27/2025</td>
+              <td>1:25 AM</td>
+              <td>PAYPAL</td>
+            </tr>
+
+
+              <tr>
+              <td>MARIA JOSE</td>
+              <td class="cell-num">5.44</td>
+              <td>MIKE ROSALES</td>
+              <td class="cell-num">5.44</td>
+              <td>09/27/2025</td>
+              <td>2:57 AM</td>
+              <td>PAYPAL</td>
+            </tr>
+
+                <tr>
+              <td>MARIA JOSE</td>
+              <td class="cell-num">50</td>
+              <td>MIKE ROSALES</td>
+              <td class="cell-num">50</td>
+              <td>09/27/2025</td>
+              <td>2:57 AM</td>
+              <td>PAYPAL</td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -556,7 +628,7 @@
         </table>
       </div>
 
-      <!-- Totales centrados -->
+      <!-- Totales primera tabla -->
       <div class="totals">
         <div class="total-card">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
@@ -567,29 +639,149 @@
           <div class="person"><div class="name">MARIA JOSE</div><div class="value" id="total-maria">$0.00</div></div>
         </div>
       </div>
+
+
+
+
+
+
+
+      <!-- Segunda tabla -->
+      <h1 class="page-title">SEGUNDA  TABLA </h1>
+      <div class="card table-wrapper">
+        <table id="new-payments-table" aria-label="Segunda tabla de pagos">
+          <thead>
+            <tr>
+              <th>NOMBRE</th>
+              <th>GANANCIA</th>
+              <th>NOMBRE</th>
+              <th>GANANCIA</th>
+              <th>FECHA</th>
+              <th>HORA</th>
+              <th>METODO DE PAGO</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>MARIA JOSE</td>
+              <td class="cell-num">7.50</td>
+              <td>MIKE ROSALES</td>
+              <td class="cell-num">7.50</td>
+              <td>10/02/2025</td>
+              <td>11:30 AM</td>
+              <td>PAYPAL</td>
+            </tr>
+
+            <tr>
+              <td>MARIA JOSE</td>
+              <td class="cell-num">5.50</td>
+              <td>MIKE ROSALES</td>
+              <td class="cell-num">5.50</td>
+              <td>10/07/2025</td>
+              <td>1:15 PM</td>
+              <td>PAYPAL</td>
+            </tr>
+
+
+
+
+
+    <tr>
+              <td>MARIA JOSE</td>
+              <td class="cell-num">5.50</td>
+              <td>MIKE ROSALES</td>
+              <td class="cell-num">5.50</td>
+              <td>10/09/2025</td>
+              <td>1:15 PM</td>
+              <td>PAYPAL</td>
+            </tr>
+
+
+                <tr>
+              <td>MARIA JOSE</td>
+              <td class="cell-num">10.50</td>
+              <td>MIKE ROSALES</td>
+              <td class="cell-num">10.50</td>
+              <td>10/11/2025</td>
+              <td>1:15 PM</td>
+              <td>PAYPAL</td>
+            </tr>
+
+
+                <tr>
+              <td>MARIA JOSE</td>
+              <td class="cell-num">10.50</td>
+              <td>MIKE ROSALES</td>
+              <td class="cell-num">10.50</td>
+              <td>10/13/2025</td>
+              <td>10:15 PM</td>
+              <td>PAYPAL</td>
+            </tr>
+
+
+
+          <tr>
+              <td>MARIA JOSE</td>
+              <td class="cell-num">10.50</td>
+              <td>MIKE ROSALES</td>
+              <td class="cell-num">10.50</td>
+              <td>10/14/2025</td>
+              <td>7:45 PM</td>
+              <td>PAYPAL</td>
+            </tr>
+
+
+
+
+
+
+
+
+          </tbody>
+        </table>
+      </div>
+
+
+
+      
+      <!-- Totales segunda tabla -->
+      <div class="totals">
+        <div class="total-card">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+            <div class="muted">Totales por persona</div>
+            <div class="muted">Moneda: USD</div>
+          </div>
+          <div class="person"><div class="name">MIKE ROSALES</div><div class="value" id="total-mike2">$0.00</div></div>
+          <div class="person"><div class="name">MARIA JOSE</div><div class="value" id="total-maria2">$0.00</div></div>
+        </div>
+      </div>
+
     </div>
   </div>
 
   <script>
-    (function(){
-      const rows = Array.from(document.querySelectorAll('#payments-table tbody tr'));
-      const totals = {}
-      rows.forEach(tr=>{
+    function calcularTotales(tableId, mikeId, mariaId) {
+      const rows = Array.from(document.querySelectorAll(`#${tableId} tbody tr`));
+      const totals = {};
+      rows.forEach(tr => {
         const cells = tr.querySelectorAll('td');
-        const pairs = [0,2].map(i=>({name: cells[i].textContent.trim(), gain: parseFloat(cells[i+1].textContent.trim())||0}));
-        pairs.forEach(p=>{
+        const pairs = [0,2].map(i => ({name: cells[i].textContent.trim(), gain: parseFloat(cells[i+1].textContent.trim())||0}));
+        pairs.forEach(p => {
           if(!p.name) return;
-          totals[p.name] = (totals[p.name]||0) + p.gain;
+          totals[p.name] = (totals[p.name] || 0) + p.gain;
         });
       });
 
-      const mikeEl = document.getElementById('total-mike');
-      const mariaEl = document.getElementById('total-maria');
       const fmt = v => '$' + v.toFixed(2);
+      const mikeEl = document.getElementById(mikeId);
+      const mariaEl = document.getElementById(mariaId);
 
-      if(mikeEl) mikeEl.textContent = fmt(totals['MIKE ROSALES'] || totals['MIKE'] || 0);
+      if(mikeEl) mikeEl.textContent = fmt(totals['MIKE ROSALES'] || 0);
       if(mariaEl) mariaEl.textContent = fmt(totals['MARIA JOSE'] || 0);
-    })();
+    }
+
+    calcularTotales('payments-table','total-mike','total-maria');
+    calcularTotales('new-payments-table','total-mike2','total-maria2');
   </script>
 </body>
 </html>
